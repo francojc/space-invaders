@@ -1,0 +1,230 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(45deg, #1a1a2e, #16213e, #0f3460);
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  max-width: 900px;
+  width: 100%;
+  padding: 20px;
+}
+
+.game-header {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.game-header h1 {
+  font-size: 2.5rem;
+  color: #ffeb3b;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin-bottom: 15px;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5), 0 0 10px #ffeb3b;
+  }
+  to {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5), 0 0 20px #ffeb3b, 0 0 30px #ffeb3b;
+  }
+}
+
+.game-info {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.score, .lives {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 25px;
+  border: 2px solid #4caf50;
+}
+
+.score .label, .lives .label {
+  color: #81c784;
+}
+
+#score-value {
+  color: #ffeb3b;
+  min-width: 80px;
+  text-align: center;
+}
+
+#lives-value {
+  color: #f44336;
+}
+
+.game-area {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#gameCanvas {
+  border: 3px solid #4caf50;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
+  box-shadow: 0 0 20px rgba(76, 175, 80, 0.3);
+}
+
+.game-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.9);
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  border: 3px solid #ffeb3b;
+  z-index: 10;
+  min-width: 300px;
+}
+
+.game-message.hidden {
+  display: none;
+}
+
+#message-title {
+  font-size: 2rem;
+  color: #ffeb3b;
+  margin-bottom: 15px;
+}
+
+#message-text {
+  font-size: 1.2rem;
+  color: #e0e0e0;
+  margin-bottom: 25px;
+  line-height: 1.5;
+}
+
+.game-button {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(45deg, #4caf50, #66bb6a);
+  border: none;
+  padding: 15px 30px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.game-button:hover {
+  background: linear-gradient(45deg, #66bb6a, #4caf50);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+}
+
+.game-button:active {
+  transform: translateY(0);
+}
+
+.game-controls {
+  margin-top: 20px;
+}
+
+.controls-info {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+}
+
+.control-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.key {
+  background: linear-gradient(45deg, #2196f3, #42a5f5);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  min-width: 50px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(33, 150, 243, 0.3);
+}
+
+.action {
+  color: #e0e0e0;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .game-container {
+    padding: 10px;
+  }
+  
+  .game-header h1 {
+    font-size: 2rem;
+  }
+  
+  .game-info {
+    gap: 20px;
+    font-size: 1.3rem;
+  }
+  
+  #gameCanvas {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+  }
+  
+  .controls-info {
+    gap: 20px;
+  }
+  
+  .control-item {
+    gap: 5px;
+  }
+}
+
+.celebration {
+  animation: celebrate 0.6s ease-in-out;
+}
+
+@keyframes celebrate {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); color: #ffeb3b; }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

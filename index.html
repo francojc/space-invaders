@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Invaders - Kid-Friendly Edition</title>
+    <link rel="stylesheet" href="styles/game.css">
+</head>
+<body>
+    <div class="game-container">
+        <header class="game-header">
+            <h1>🚀 Space Invaders 🛸</h1>
+            <div class="game-info">
+                <div class="score">
+                    <span class="label">Score:</span>
+                    <span id="score-value">0</span>
+                </div>
+                <div class="lives">
+                    <span class="label">Lives:</span>
+                    <span id="lives-value">5</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="game-area">
+            <canvas id="gameCanvas" width="800" height="600"></canvas>
+            
+            <div id="game-message" class="game-message hidden">
+                <h2 id="message-title">Get Ready!</h2>
+                <p id="message-text">Use arrow keys to move and spacebar to shoot!</p>
+                <button id="start-button" class="game-button">Start Game</button>
+            </div>
+        </div>
+
+        <footer class="game-controls">
+            <div class="controls-info">
+                <div class="control-item">
+                    <span class="key">←→</span>
+                    <span class="action">Move</span>
+                </div>
+                <div class="control-item">
+                    <span class="key">Space</span>
+                    <span class="action">Shoot</span>
+                </div>
+                <div class="control-item">
+                    <span class="key">P</span>
+                    <span class="action">Pause</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/bullet.js"></script>
+    <script src="js/alien.js"></script>
+    <script src="js/collision.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>
