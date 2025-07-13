@@ -65,8 +65,13 @@ class Game {
 
   showStartScreen() {
     this.gameState = 'menu';
-    const isMobile = window.innerWidth <= 768;
-    const controls = isMobile ? 
+    // Better touch device detection including iPads
+    const isTouchDevice = 'ontouchstart' in window || 
+                         navigator.maxTouchPoints > 0 || 
+                         navigator.msMaxTouchPoints > 0 ||
+                         window.innerWidth <= 768;
+    
+    const controls = isTouchDevice ? 
       'Use the LEFT and RIGHT buttons to move\nTap the SHOOT button to fire!' :
       'Use arrow keys to move and spacebar to shoot!';
     

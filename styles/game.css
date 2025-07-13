@@ -312,15 +312,19 @@ body {
   margin-top: 4px;
 }
 
-/* Hide mobile controls on desktop */
-@media (min-width: 769px) {
+/* Hide mobile controls on non-touch devices only */
+@media (hover: hover) and (pointer: fine) {
   .mobile-controls {
     display: none;
   }
 }
 
-/* Mobile-specific adjustments */
-@media (max-width: 768px) {
+/* Show mobile controls on touch devices (including iPads) */
+@media (hover: none) and (pointer: coarse), 
+       (pointer: coarse),
+       (max-width: 768px),
+       (max-width: 1024px) and (orientation: portrait),
+       (max-height: 1366px) and (orientation: landscape) and (pointer: coarse) {
   .mobile-controls {
     display: flex;
   }
