@@ -5,10 +5,17 @@ A colorful, fun HTML5 Canvas Space Invaders game designed specifically for kids!
 ## 🎮 How to Play
 
 ### Controls
+
+#### Desktop
 - **Arrow Keys (←→)**: Move your spaceship left and right
 - **Spacebar**: Shoot laser bullets at the aliens
 - **P**: Pause/Resume the game
 - **Enter**: Start game or restart after game over
+
+#### Mobile (iPhone/iPad)
+- **Touch Left/Right Zones**: Move your spaceship left and right
+- **Orange Shoot Button**: Tap to shoot laser bullets at the aliens
+- Touch controls automatically appear on mobile devices
 
 ### Objective
 Defend Earth from the colorful alien invasion! Shoot all the aliens before they reach the bottom of the screen or collide with your ship.
@@ -37,7 +44,8 @@ Defend Earth from the colorful alien invasion! Shoot all the aliens before they 
 - **Pure HTML5 Canvas**: No external dependencies
 - **Kid-Safe**: No inappropriate content, violence, or scary elements
 - **Cross-Browser**: Works on Chrome, Firefox, Safari, and Edge
-- **Mobile-Friendly**: Responsive design for tablets
+- **Mobile-Optimized**: Touch controls for iPhone, iPad, and Android devices
+- **Responsive Design**: Automatically adapts to different screen sizes
 
 ## 🎯 Game Tips for Kids
 

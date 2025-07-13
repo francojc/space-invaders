@@ -25,6 +25,20 @@
         <div class="game-area">
             <canvas id="gameCanvas" width="800" height="600"></canvas>
             
+            <!-- Mobile Touch Controls -->
+            <div class="mobile-controls">
+                <div class="touch-zone left-zone" id="left-touch-zone">
+                    <div class="touch-indicator">◀</div>
+                </div>
+                <div class="touch-zone right-zone" id="right-touch-zone">
+                    <div class="touch-indicator">▶</div>
+                </div>
+                <div class="shoot-button" id="shoot-button">
+                    <div class="shoot-icon">🚀</div>
+                    <div class="shoot-label">SHOOT</div>
+                </div>
+            </div>
+            
             <div id="game-message" class="game-message hidden">
                 <h2 id="message-title">Get Ready!</h2>
                 <p id="message-text">Use arrow keys to move and spacebar to shoot!</p>

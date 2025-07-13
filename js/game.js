@@ -17,7 +17,15 @@ class Game {
     this.lastTime = 0;
     this.animationId = null;
     
+    // Mobile touch state
+    this.touchState = {
+      left: false,
+      right: false,
+      shooting: false
+    };
+    
     this.bindEvents();
+    this.bindMobileEvents();
     this.showStartScreen();
   }
 
@@ -57,9 +65,14 @@ class Game {
 
   showStartScreen() {
     this.gameState = 'menu';
+    const isMobile = window.innerWidth <= 768;
+    const controls = isMobile ? 
+      'Touch the left and right sides to move\nTap the orange button to shoot!' :
+      'Use arrow keys to move and spacebar to shoot!';
+    
     Utils.showMessage(
       '🚀 Space Invaders! 🛸',
-      'Defend Earth from the colorful alien invasion!\nUse arrow keys to move and spacebar to shoot!',
+      `Defend Earth from the colorful alien invasion!\n${controls}`,
       'Start Adventure',
       () => this.startGame()
     );
@@ -131,12 +144,142 @@ class Game {
   }
 
   handleInput() {
+    // Keyboard input
     if (this.keys['ArrowLeft']) {
       this.player.moveLeft();
     }
     if (this.keys['ArrowRight']) {
       this.player.moveRight(this.canvas.width);
     }
+    
+    // Touch input
+    if (this.touchState.left) {
+      this.player.moveLeft();
+    }
+    if (this.touchState.right) {
+      this.player.moveRight(this.canvas.width);
+    }
+  }
+
+  bindMobileEvents() {
+    // Left touch zone
+    const leftZone = document.getElementById('left-touch-zone');
+    const rightZone = document.getElementById('right-touch-zone');
+    const shootButton = document.getElementById('shoot-button');
+
+    // Prevent default touch behaviors
+    const preventDefaults = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+    };
+
+    // Left zone events
+    leftZone.addEventListener('touchstart', (e) => {
+      preventDefaults(e);
+      this.touchState.left = true;
+      leftZone.classList.add('active');
+    });
+
+    leftZone.addEventListener('touchend', (e) => {
+      preventDefaults(e);
+      this.touchState.left = false;
+      leftZone.classList.remove('active');
+    });
+
+    leftZone.addEventListener('touchcancel', (e) => {
+      preventDefaults(e);
+      this.touchState.left = false;
+      leftZone.classList.remove('active');
+    });
+
+    // Right zone events
+    rightZone.addEventListener('touchstart', (e) => {
+      preventDefaults(e);
+      this.touchState.right = true;
+      rightZone.classList.add('active');
+    });
+
+    rightZone.addEventListener('touchend', (e) => {
+      preventDefaults(e);
+      this.touchState.right = false;
+      rightZone.classList.remove('active');
+    });
+
+    rightZone.addEventListener('touchcancel', (e) => {
+      preventDefaults(e);
+      this.touchState.right = false;
+      rightZone.classList.remove('active');
+    });
+
+    // Shoot button events
+    shootButton.addEventListener('touchstart', (e) => {
+      preventDefaults(e);
+      if (this.gameState === 'playing') {
+        this.player.shoot();
+        audioManager.resumeContext();
+      }
+    });
+
+    shootButton.addEventListener('touchend', preventDefaults);
+    shootButton.addEventListener('touchcancel', preventDefaults);
+
+    // Add mouse events for testing on desktop
+    leftZone.addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      this.touchState.left = true;
+      leftZone.classList.add('active');
+    });
+
+    leftZone.addEventListener('mouseup', (e) => {
+      e.preventDefault();
+      this.touchState.left = false;
+      leftZone.classList.remove('active');
+    });
+
+    leftZone.addEventListener('mouseleave', (e) => {
+      this.touchState.left = false;
+      leftZone.classList.remove('active');
+    });
+
+    rightZone.addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      this.touchState.right = true;
+      rightZone.classList.add('active');
+    });
+
+    rightZone.addEventListener('mouseup', (e) => {
+      e.preventDefault();
+      this.touchState.right = false;
+      rightZone.classList.remove('active');
+    });
+
+    rightZone.addEventListener('mouseleave', (e) => {
+      this.touchState.right = false;
+      rightZone.classList.remove('active');
+    });
+
+    shootButton.addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      if (this.gameState === 'playing') {
+        this.player.shoot();
+        audioManager.resumeContext();
+      }
+    });
+
+    // Global touch event cleanup
+    document.addEventListener('touchend', () => {
+      this.touchState.left = false;
+      this.touchState.right = false;
+      leftZone.classList.remove('active');
+      rightZone.classList.remove('active');
+    });
+
+    document.addEventListener('touchcancel', () => {
+      this.touchState.left = false;
+      this.touchState.right = false;
+      leftZone.classList.remove('active');
+      rightZone.classList.remove('active');
+    });
   }
 
   updateBullets() {
