@@ -232,68 +232,23 @@ body {
 /* Mobile Touch Controls */
 .mobile-controls {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  height: 120px;
   pointer-events: none;
   z-index: 5;
-}
-
-.touch-zone {
-  position: absolute;
-  top: 0;
-  width: 30%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.05);
-  border: 2px solid rgba(255, 255, 255, 0.1);
   display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: auto;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  transition: all 0.2s ease;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
-.touch-zone.active {
-  background: rgba(76, 175, 80, 0.2);
-  border-color: rgba(76, 175, 80, 0.4);
-  transform: scale(1.05);
-}
-
-.left-zone {
-  left: 0;
-  border-radius: 0 20px 20px 0;
-}
-
-.right-zone {
-  right: 0;
-  border-radius: 20px 0 0 20px;
-}
-
-.touch-indicator {
-  font-size: 3rem;
-  color: rgba(255, 255, 255, 0.6);
-  pointer-events: none;
-  transition: color 0.2s ease;
-}
-
-.touch-zone.active .touch-indicator {
-  color: #4caf50;
-  text-shadow: 0 0 10px #4caf50;
-}
-
-.shoot-button {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  width: 80px;
-  height: 80px;
-  background: linear-gradient(45deg, #ff6b35, #f7931e);
+.control-button {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(45deg, #4caf50, #66bb6a);
   border: 3px solid #fff;
-  border-radius: 50%;
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -304,25 +259,57 @@ body {
   touch-action: manipulation;
   cursor: pointer;
   transition: all 0.2s ease;
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.control-button:active {
+  transform: scale(0.95);
+  background: linear-gradient(45deg, #66bb6a, #4caf50);
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.5);
+}
+
+.left-button {
+  align-self: center;
+}
+
+.right-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+.right-button {
+  background: linear-gradient(45deg, #2196f3, #42a5f5);
+  box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+}
+
+.right-button:active {
+  background: linear-gradient(45deg, #42a5f5, #2196f3);
+  box-shadow: 0 2px 8px rgba(33, 150, 243, 0.5);
+}
+
+.shoot-button {
+  background: linear-gradient(45deg, #ff6b35, #f7931e);
   box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
 }
 
 .shoot-button:active {
-  transform: scale(0.95);
   background: linear-gradient(45deg, #f7931e, #ff6b35);
   box-shadow: 0 2px 8px rgba(255, 107, 53, 0.5);
 }
 
-.shoot-icon {
-  font-size: 1.8rem;
+.button-icon {
+  font-size: 2.5rem;
   line-height: 1;
+  color: white;
 }
 
-.shoot-label {
-  font-size: 0.6rem;
+.button-label {
+  font-size: 0.7rem;
   font-weight: bold;
   color: white;
-  margin-top: 2px;
+  margin-top: 4px;
 }
 
 /* Hide mobile controls on desktop */
@@ -335,30 +322,24 @@ body {
 /* Mobile-specific adjustments */
 @media (max-width: 768px) {
   .mobile-controls {
-    display: block;
+    display: flex;
   }
   
-  .touch-zone {
-    border-width: 1px;
+  .control-button {
+    width: 80px;
+    height: 80px;
   }
   
-  .touch-indicator {
-    font-size: 2.5rem;
+  .button-icon {
+    font-size: 2rem;
   }
   
-  .shoot-button {
-    width: 70px;
-    height: 70px;
-    bottom: 15px;
-    right: 15px;
+  .button-label {
+    font-size: 0.6rem;
   }
   
-  .shoot-icon {
-    font-size: 1.5rem;
-  }
-  
-  .shoot-label {
-    font-size: 0.55rem;
+  .right-controls {
+    gap: 10px;
   }
   
   /* Adjust game message for mobile */
@@ -379,7 +360,7 @@ body {
 
 /* iOS-specific optimizations */
 @supports (-webkit-touch-callout: none) {
-  .touch-zone, .shoot-button {
+  .control-button {
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
     -webkit-user-select: none;

@@ -67,7 +67,7 @@ class Game {
     this.gameState = 'menu';
     const isMobile = window.innerWidth <= 768;
     const controls = isMobile ? 
-      'Touch the left and right sides to move\nTap the orange button to shoot!' :
+      'Use the LEFT and RIGHT buttons to move\nTap the SHOOT button to fire!' :
       'Use arrow keys to move and spacebar to shoot!';
     
     Utils.showMessage(
@@ -162,10 +162,15 @@ class Game {
   }
 
   bindMobileEvents() {
-    // Left touch zone
-    const leftZone = document.getElementById('left-touch-zone');
-    const rightZone = document.getElementById('right-touch-zone');
+    // Get button elements
+    const leftButton = document.getElementById('left-button');
+    const rightButton = document.getElementById('right-button');
     const shootButton = document.getElementById('shoot-button');
+
+    if (!leftButton || !rightButton || !shootButton) {
+      console.log('Mobile control buttons not found');
+      return;
+    }
 
     // Prevent default touch behaviors
     const preventDefaults = (e) => {
@@ -173,47 +178,46 @@ class Game {
       e.stopPropagation();
     };
 
-    // Left zone events
-    leftZone.addEventListener('touchstart', (e) => {
+    // Left button events
+    leftButton.addEventListener('touchstart', (e) => {
       preventDefaults(e);
       this.touchState.left = true;
-      leftZone.classList.add('active');
+      console.log('Left button touch start');
     });
 
-    leftZone.addEventListener('touchend', (e) => {
+    leftButton.addEventListener('touchend', (e) => {
       preventDefaults(e);
       this.touchState.left = false;
-      leftZone.classList.remove('active');
+      console.log('Left button touch end');
     });
 
-    leftZone.addEventListener('touchcancel', (e) => {
+    leftButton.addEventListener('touchcancel', (e) => {
       preventDefaults(e);
       this.touchState.left = false;
-      leftZone.classList.remove('active');
     });
 
-    // Right zone events
-    rightZone.addEventListener('touchstart', (e) => {
+    // Right button events
+    rightButton.addEventListener('touchstart', (e) => {
       preventDefaults(e);
       this.touchState.right = true;
-      rightZone.classList.add('active');
+      console.log('Right button touch start');
     });
 
-    rightZone.addEventListener('touchend', (e) => {
+    rightButton.addEventListener('touchend', (e) => {
       preventDefaults(e);
       this.touchState.right = false;
-      rightZone.classList.remove('active');
+      console.log('Right button touch end');
     });
 
-    rightZone.addEventListener('touchcancel', (e) => {
+    rightButton.addEventListener('touchcancel', (e) => {
       preventDefaults(e);
       this.touchState.right = false;
-      rightZone.classList.remove('active');
     });
 
     // Shoot button events
     shootButton.addEventListener('touchstart', (e) => {
       preventDefaults(e);
+      console.log('Shoot button touched, game state:', this.gameState);
       if (this.gameState === 'playing') {
         this.player.shoot();
         audioManager.resumeContext();
@@ -224,42 +228,39 @@ class Game {
     shootButton.addEventListener('touchcancel', preventDefaults);
 
     // Add mouse events for testing on desktop
-    leftZone.addEventListener('mousedown', (e) => {
+    leftButton.addEventListener('mousedown', (e) => {
       e.preventDefault();
       this.touchState.left = true;
-      leftZone.classList.add('active');
+      console.log('Left button mouse down');
     });
 
-    leftZone.addEventListener('mouseup', (e) => {
+    leftButton.addEventListener('mouseup', (e) => {
       e.preventDefault();
       this.touchState.left = false;
-      leftZone.classList.remove('active');
     });
 
-    leftZone.addEventListener('mouseleave', (e) => {
+    leftButton.addEventListener('mouseleave', (e) => {
       this.touchState.left = false;
-      leftZone.classList.remove('active');
     });
 
-    rightZone.addEventListener('mousedown', (e) => {
+    rightButton.addEventListener('mousedown', (e) => {
       e.preventDefault();
       this.touchState.right = true;
-      rightZone.classList.add('active');
+      console.log('Right button mouse down');
     });
 
-    rightZone.addEventListener('mouseup', (e) => {
+    rightButton.addEventListener('mouseup', (e) => {
       e.preventDefault();
       this.touchState.right = false;
-      rightZone.classList.remove('active');
     });
 
-    rightZone.addEventListener('mouseleave', (e) => {
+    rightButton.addEventListener('mouseleave', (e) => {
       this.touchState.right = false;
-      rightZone.classList.remove('active');
     });
 
     shootButton.addEventListener('mousedown', (e) => {
       e.preventDefault();
+      console.log('Shoot button clicked, game state:', this.gameState);
       if (this.gameState === 'playing') {
         this.player.shoot();
         audioManager.resumeContext();
@@ -270,16 +271,14 @@ class Game {
     document.addEventListener('touchend', () => {
       this.touchState.left = false;
       this.touchState.right = false;
-      leftZone.classList.remove('active');
-      rightZone.classList.remove('active');
     });
 
     document.addEventListener('touchcancel', () => {
       this.touchState.left = false;
       this.touchState.right = false;
-      leftZone.classList.remove('active');
-      rightZone.classList.remove('active');
     });
+
+    console.log('Mobile event handlers bound successfully');
   }
 
   updateBullets() {
