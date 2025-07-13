@@ -85,6 +85,28 @@ const Utils = {
     messageDiv.classList.remove('fade-in');
   },
 
+  showNotification(text, type = 'normal', duration = 2000) {
+    const notificationDiv = document.getElementById('notification');
+    notificationDiv.textContent = text;
+    
+    // Reset classes
+    notificationDiv.className = 'notification';
+    
+    // Add type-specific class
+    if (type === 'bonus') {
+      notificationDiv.classList.add('bonus');
+    } else if (type === 'hit') {
+      notificationDiv.classList.add('hit');
+    }
+    
+    notificationDiv.classList.remove('hidden');
+    
+    // Auto-hide after duration
+    setTimeout(() => {
+      notificationDiv.classList.add('hidden');
+    }, duration);
+  },
+
   getRandomExplosionColor() {
     const colors = ['#FFD700', '#FF6347', '#FF69B4', '#00CED1', '#98FB98'];
     return colors[Math.floor(Math.random() * colors.length)];

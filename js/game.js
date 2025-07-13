@@ -360,8 +360,7 @@ class Game {
       this.lives++;
       Utils.updateLives(this.lives);
       audioManager.playSound('powerUp');
-      Utils.showMessage('🎉 Bonus Life!', 'Keep up the great work!', null, null);
-      setTimeout(() => Utils.hideMessage(), 2000);
+      Utils.showNotification('🎉 Bonus Life!', 'bonus', 3000);
     }
   }
 
@@ -372,8 +371,7 @@ class Game {
     audioManager.playSound('explosion');
     
     if (this.lives > 0) {
-      Utils.showMessage('💥 Ouch!', `${this.lives} lives left. You can do it!`, null, null);
-      setTimeout(() => Utils.hideMessage(), 1500);
+      Utils.showNotification(`💥 ${this.lives} lives left!`, 'hit', 2000);
     }
   }
 

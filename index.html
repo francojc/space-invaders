@@ -7,7 +7,7 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <title>Space Invaders - Kid-Friendly Edition</title>
-    <link rel="stylesheet" href="styles/game.css?v=3">
+    <link rel="stylesheet" href="styles/game.css?v=4">
 </head>
 <body>
     <div class="game-container">
@@ -35,16 +35,19 @@
                     <div class="button-label">LEFT</div>
                 </div>
                 <div class="right-controls">
-                    <div class="control-button right-button" id="right-button">
-                        <div class="button-icon">▶</div>
-                        <div class="button-label">RIGHT</div>
-                    </div>
                     <div class="control-button shoot-button" id="shoot-button">
                         <div class="button-icon">🚀</div>
                         <div class="button-label">SHOOT</div>
                     </div>
+                    <div class="control-button right-button" id="right-button">
+                        <div class="button-icon">▶</div>
+                        <div class="button-label">RIGHT</div>
+                    </div>
                 </div>
             </div>
+            
+            <!-- Discrete notification system -->
+            <div id="notification" class="notification hidden"></div>
             
             <div id="game-message" class="game-message hidden">
                 <h2 id="message-title">Get Ready!</h2>
@@ -71,12 +74,12 @@
         </footer>
     </div>
 
-    <script src="js/utils.js?v=3"></script>
-    <script src="js/audio.js?v=3"></script>
-    <script src="js/player.js?v=3"></script>
-    <script src="js/bullet.js?v=3"></script>
-    <script src="js/alien.js?v=3"></script>
-    <script src="js/collision.js?v=3"></script>
-    <script src="js/game.js?v=3"></script>
+    <script src="js/utils.js?v=4"></script>
+    <script src="js/audio.js?v=4"></script>
+    <script src="js/player.js?v=4"></script>
+    <script src="js/bullet.js?v=4"></script>
+    <script src="js/alien.js?v=4"></script>
+    <script src="js/collision.js?v=4"></script>
+    <script src="js/game.js?v=4"></script>
 </body>
 </html>

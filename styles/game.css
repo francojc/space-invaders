@@ -229,6 +229,52 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* Discrete Notification System */
+.notification {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 25px;
+  border: 2px solid #4caf50;
+  font-size: 1rem;
+  font-weight: bold;
+  z-index: 15;
+  max-width: 200px;
+  text-align: center;
+  animation: slideInRight 0.3s ease-out;
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.notification.hidden {
+  display: none;
+}
+
+.notification.bonus {
+  border-color: #ffeb3b;
+  color: #ffeb3b;
+  box-shadow: 0 4px 15px rgba(255, 235, 59, 0.3);
+}
+
+.notification.hit {
+  border-color: #f44336;
+  color: #f44336;
+  box-shadow: 0 4px 15px rgba(244, 67, 54, 0.3);
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
 /* Mobile Touch Controls */
 .mobile-controls {
   position: absolute;
